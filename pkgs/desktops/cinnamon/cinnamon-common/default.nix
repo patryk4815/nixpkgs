@@ -1,6 +1,5 @@
 { atk
 , cacert
-, fetchpatch
 , dbus
 , cinnamon-control-center
 , cinnamon-desktop
@@ -8,11 +7,13 @@
 , cinnamon-session
 , cinnamon-translations
 , cjs
+, clutter
 , fetchFromGitHub
 , gdk-pixbuf
 , libgnomekbd
 , glib
 , gobject-introspection
+, gsound
 , gtk3
 , intltool
 , json-glib
@@ -47,27 +48,23 @@
 , meson
 , ninja
 , gst_all_1
+, perl
 }:
 
 stdenv.mkDerivation rec {
   pname = "cinnamon-common";
-  version = "5.2.0";
+  version = "5.4.4";
 
   src = fetchFromGitHub {
     owner = "linuxmint";
     repo = "cinnamon";
     rev = version;
-    hash = "sha256-B2Du2zis0xWeeyh3kSyz1doWImk9Fuk4qQ8HNZZdqdw=";
+    hash = "sha256-hAQBisW1KmeUsGD8PJncLWFPb1/Q7U8wxAa0e6qdJyc=";
   };
 
   patches = [
     ./use-sane-install-dir.patch
     ./libdir.patch
-
-    (fetchpatch {
-      url = "https://github.com/linuxmint/cinnamon/commit/77ed66050f7df889fcb7a10b702c7b8bcdeaa130.patch";
-      sha256 = "sha256-OegLxz6Xr/nxVwVOAd2oOY62ohZ3r6uYn1+YED5EBHQ=";
-    })
   ];
 
   buildInputs = [
@@ -79,9 +76,11 @@ stdenv.mkDerivation rec {
     cinnamon-desktop
     cinnamon-menus
     cjs
+    clutter
     dbus
     gdk-pixbuf
     glib
+    gsound
     gtk3
     json-glib
     libsoup
@@ -120,6 +119,7 @@ stdenv.mkDerivation rec {
     wrapGAppsHook
     intltool
     gtk-doc
+    perl
   ];
 
   # use locales from cinnamon-translations (not using --localedir because datadir is used)
@@ -151,6 +151,8 @@ stdenv.mkDerivation rec {
 
     sed "s| cinnamon-session| ${cinnamon-session}/bin/cinnamon-session|g" -i ./files/usr/bin/cinnamon-session-cinnamon  -i ./files/usr/bin/cinnamon-session-cinnamon2d
     sed "s|/usr/bin|$out/bin|g" -i ./files/usr/share/xsessions/cinnamon.desktop ./files/usr/share/xsessions/cinnamon2d.desktop
+
+    patchShebangs src/data-to-c.pl
   '';
 
   passthru = {
