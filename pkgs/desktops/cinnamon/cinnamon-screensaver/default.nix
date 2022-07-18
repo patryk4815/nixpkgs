@@ -22,19 +22,20 @@
 , accountsservice
 , cairo
 , xapps
+, xdotool
 , xorg
 , iso-flags-png-320x420
 }:
 
 stdenv.mkDerivation rec {
   pname = "cinnamon-screensaver";
-  version = "5.2.0";
+  version = "5.4.1";
 
   src = fetchFromGitHub {
     owner = "linuxmint";
     repo = pname;
     rev = version;
-    hash = "sha256-weQ5sw5SY89JFIxamCeLiSLy8xCXGg0Yxj/5Ca5r+6o=";
+    hash = "sha256-PpBtLAIboXMnX5V/u06aoZ6WfPrn4mdCu0NXTGb6pAE=";
   };
 
   nativeBuildInputs = [
@@ -62,6 +63,7 @@ stdenv.mkDerivation rec {
 
     (python3.withPackages (pp: with pp; [ pygobject3 setproctitle xapp pycairo ]))
     xapps
+    xdotool
     pam
     accountsservice
     cairo
