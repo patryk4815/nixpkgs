@@ -12,7 +12,6 @@
 , libxklavier
 , wrapGAppsHook
 , pkg-config
-, pulseaudio
 , lib
 , stdenv
 , systemd
@@ -30,28 +29,17 @@
 , libgudev
 , meson
 , ninja
-, dbus
-, dbus-glib
 }:
 
 stdenv.mkDerivation rec {
   pname = "cinnamon-settings-daemon";
-  version = "5.2.0";
-
-  /* csd-power-manager.c:50:10: fatal error: csd-power-proxy.h: No such file or directory
-   #include "csd-power-proxy.h"
-            ^~~~~~~~~~~~~~~~~~~
-  compilation terminated. */
-
-  # but this occurs only sometimes, so disabling parallel building
-  # also see https://github.com/linuxmint/cinnamon-settings-daemon/issues/248
-  enableParallelBuilding = false;
+  version = "5.4.2";
 
   src = fetchFromGitHub {
     owner = "linuxmint";
     repo = pname;
     rev = version;
-    hash = "sha256-6omif4UxMrXWxL+R9lQ8ogxotW+3E9Kp99toH3PJtaU=";
+    hash = "sha256-wHbm+eUEB23M2doePy51QMP2HwGfmo5p6JP0dk9EeZI=";
   };
 
   patches = [
@@ -72,7 +60,6 @@ stdenv.mkDerivation rec {
     libgnomekbd
     libnotify
     libxklavier
-    pulseaudio
     systemd
     upower
     dconf
@@ -89,8 +76,6 @@ stdenv.mkDerivation rec {
     fontconfig
     nss
     libgudev
-    dbus
-    dbus-glib
   ];
 
   nativeBuildInputs = [
