@@ -14,7 +14,6 @@
 , polkit
 , libxkbfile
 , cinnamon-menus
-, dbus-glib
 , libgnomekbd
 , libxklavier
 , networkmanager
@@ -31,17 +30,18 @@
 , ninja
 , cinnamon-translations
 , python3
+, upower
 }:
 
 stdenv.mkDerivation rec {
   pname = "cinnamon-control-center";
-  version = "5.2.0";
+  version = "5.4.4";
 
   src = fetchFromGitHub {
     owner = "linuxmint";
     repo = pname;
     rev = version;
-    hash = "sha256-j7+2uLcHr7bO7i8OGqkw3ifawZULNyihhJ+h2D5gx/k=";
+    hash = "sha256-c2JbRAMcTnqaqt8MXQl4AxnENVmfYyHcCteWBWQUSO0=";
   };
 
   buildInputs = [
@@ -51,7 +51,6 @@ stdenv.mkDerivation rec {
     libnotify
     cinnamon-menus
     libxml2
-    dbus-glib
     polkit
     libgnomekbd
     libxklavier
@@ -66,6 +65,7 @@ stdenv.mkDerivation rec {
     xorg.libXxf86misc
     xorg.libxkbfile
     gdk-pixbuf
+    upower
   ];
 
   /* ./panels/datetime/test-timezone.c:4:#define TZ_DIR "/usr/share/zoneinfo/"
