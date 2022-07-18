@@ -8,14 +8,14 @@
 
 stdenv.mkDerivation rec {
   pname = "mint-themes";
-  version = "1.8.8";
+  version = "2.0.2";
 
   src = fetchFromGitHub {
     owner = "linuxmint";
     repo = pname;
     # they don't exactly do tags, it's just a named commit
-    rev = "a833fba6917043bf410dee4364c9a36af1ce4c83";
-    hash = "sha256-8abjjD0XoApvqB8SNlWsqIEp7ozgiERGS0kWglw2DWA=";
+    rev = "695285c7240c3ed63dd18562bbe169542b30c319";
+    hash = "sha256-GL3kCl1WpeoBiZGN7otNrQvJJMdG8Dc6A1g2f49Ywy4=";
   };
 
   nativeBuildInputs = [
