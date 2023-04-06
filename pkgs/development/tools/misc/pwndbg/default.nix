@@ -9,7 +9,6 @@
 let
   pythonPath = with python3.pkgs; makePythonPath [
     capstone
-    future
     psutil
     pwntools
     pycparser
@@ -17,6 +16,10 @@ let
     pygments
     unicorn
     rpyc
+    tabulate
+    requests
+    types-requests
+    typing-extensions
   ];
   binPath = lib.makeBinPath ([
     python3.pkgs.pwntools   # ref: https://github.com/pwndbg/pwndbg/blob/2022.12.19/pwndbg/wrappers/checksec.py#L8
@@ -27,14 +30,14 @@ let
 
 in stdenv.mkDerivation rec {
   pname = "pwndbg";
-  version = "2022.12.19";
+  version = "2023.03.19";
   format = "other";
 
   src = fetchFromGitHub {
     owner = "pwndbg";
     repo = "pwndbg";
     rev = version;
-    sha256 = "sha256-pyY2bMasd6GaJZZjLF48SvkKUBw3XfVa0g3Q0LiEi4k=";
+    sha256 = "sha256-TD+hrcxgnghOd0ehUZevTateDMD6ypcTPgXI/i49+bs=";
     fetchSubmodules = true;
   };
 
@@ -47,6 +50,7 @@ in stdenv.mkDerivation rec {
     makeWrapper ${gdb}/bin/gdb $out/bin/pwndbg \
       --add-flags "-q -x $out/share/pwndbg/gdbinit.py" \
       --prefix PATH : ${binPath} \
+      --set LC_CTYPE "C.UTF-8" \
       --set NIX_PYTHONPATH ${pythonPath}
   '';
 
