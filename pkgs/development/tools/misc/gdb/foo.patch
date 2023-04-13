@@ -1,0 +1,18 @@
+diff --git a/gdb/python/py-inferior.c b/gdb/python/py-inferior.c
+index 8b21f28afbe..295af84f8f7 100644
+--- a/gdb/python/py-inferior.c
++++ b/gdb/python/py-inferior.c
+@@ -92,6 +92,13 @@ python_on_normal_stop (struct bpstat *bs, int print_frame)
+   if (inferior_ptid == null_ptid)
+     return;
+
++  /* Clear the stop_bpstat for the stopping thread while handling the
++     Python stop event.  If the stop event calls gdb.execute then we don't
++     want GDB to start running any commands held on the stop_bpstat
++     immediately after the gdb.execute completes.  */
++  scoped_restore restore_bpstat
++    = make_scoped_restore (&inferior_thread ()->control.stop_bpstat, nullptr);
++
+   stop_signal = inferior_thread ()->stop_signal ();
+
+   gdbpy_enter enter_py;

@@ -47,6 +47,7 @@ stdenv.mkDerivation rec {
 
   patches = [
     ./debug-info-from-env.patch
+    ./foo.patch
   ] ++ lib.optionals stdenv.isDarwin [
     ./darwin-target-match.patch
   ];
