@@ -5,9 +5,9 @@ IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
-diff --git a/lldb/CMakeLists.txt b/lldb/CMakeLists.txt
---- a/lldb/CMakeLists.txt	(revision e21dc4bd5474d04b8e62d7331362edcc5648d7e5)
-+++ b/lldb/CMakeLists.txt	(revision 2f1df1d442199f7ede7a17a4e87034e7d67744a8)
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	(revision e21dc4bd5474d04b8e62d7331362edcc5648d7e5)
++++ b/CMakeLists.txt	(revision 2f1df1d442199f7ede7a17a4e87034e7d67744a8)
 @@ -59,8 +59,23 @@
    set(cachestring_LLDB_PYTHON_EXT_SUFFIX
      "Filename extension for native code python modules")
