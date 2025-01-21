@@ -22,7 +22,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 +    #   platform, build, and configuration details (e.g., `_sysconfigdata__linux_x86_64-linux-gnu`).
 +    # See: https://peps.python.org/pep-0720/#upstream-support
 +    # If both environment variables are defined, we assume host Python can be used.
-+    if(DEFINED ENV{_PYTHON_HOST_PLATFORM} and DEFINED ENV{_PYTHON_SYSCONFIGDATA_NAME})
++    if(DEFINED ENV{_PYTHON_HOST_PLATFORM} AND DEFINED ENV{_PYTHON_SYSCONFIGDATA_NAME})
 +      set(LLDB_USE_HOST_PYTHON TRUE)
 +    endif()
 +  endif()
